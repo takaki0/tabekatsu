@@ -1,0 +1,38 @@
+version: '3'
+services:
+  nginx:
+    image: nginx:1.15
+    ports:
+      - 80:80
+    volumes:
+      - ./source:/usr/share/nginx/html
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+
+  php-fpm:
+    build: ./php-fpm
+    ports:
+      - 8050:8000
+    volumes:
+      - ./source:/var/www/html
+    tty: true
+    privileged: true
+
+  mysql:
+      image: mysql:8.0
+      environment:
+        MYSQL_DATABASE: tabekatsu
+        MYSQL_ROOT_PASSWORD: password
+        MYSQL_USER: tk_user
+        MYSQL_PASSWORD: tk_user
+        TZ: Asia/Tokyo
+      ports:
+        - 3306:3306
+      volumes:
+        - ./mysql/data:/var/lib/mysql
+        - ./mysql/init:/docker-entrypoint-initdb.d
+        - ./mysql/conf:/etc/mysql/conf.d
+
+  redis:
+    image: redis:latest
+    ports:
+      - 6379:6379

@@ -1,0 +1,8 @@
+--docker コンテナ接続
+docker exec -it laravel_exercise_php-fpm_1 /bin/bash
+
+--classのロード
+composer dump-autoload
+
+--インストール済みパッケージリスト
+composer show -i

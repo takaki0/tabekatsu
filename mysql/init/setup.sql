@@ -1,0 +1,4 @@
+-- setup for tabekatsu
+--create database eblockchain; //have alrady made
+--create user 'tk_user'@'%' identified by 'tk_user';//have alrady made
+--grant all PRIVILEGES on tabekatsu.* to 'tk_user'@'%' ;////have alrady made
